@@ -1,19 +1,18 @@
-# Gateway Spike — Class 6
+# Class 6: First MCP Tests
 
-I used Python 3.12.15 and MCP Python SDK 2.3.0 for both checks.
+I used Python 3.12 and the MCP Python SDK (version 2.3.0).
 
-- **Small server:** The client listed and called the `hello` tool in memory and
-  over stdio. Both calls returned `Hello, ToolRouter!`.
-- **Filesystem server:** The client connected over stdio to the reference server
-  (`@modelcontextprotocol/server-filesystem@2.2.0`) started with npx. It listed
-  16 tools. Calling `list_directory` in the test folder returned
-  `[FILE] example.txt`.
+1. I made a small server with one tool called `hello`. The client found and
+   called the tool in the same Python process and then in a separate process
+   using stdio. Both calls returned `Hello, ToolRouter!`.
+2. I started the MCP filesystem server (version 2.2.0) with npx and gave it
+   access to the test folder. The client listed 16 tools. I called
+   `list_directory` and got `[FILE] example.txt`.
 
-## Run the checks
+## How to run it
 
-From `spikes/gateway-class6`, install `requirements.txt` in a Python 3.12
-environment. Run `python check.py hello` for the small server. With Node.js 24
-or later, run `python check.py filesystem --npx-script <path-to-npx-cli.js>` for
-the filesystem check. The npx script is in the `bin` directory of npm.
-
-The filesystem server only receives the included `sandbox` directory.
+Open `spikes/gateway-class6` and install the dependency with
+`python -m pip install -r requirements.txt` in a Python 3.12 environment.
+Run `python check.py` for the small server. To also run the filesystem test,
+use Node.js 24 or later and run `python check.py "path/to/npx-cli.js"`.
+The script `npx-cli.js` is in npm's `bin` folder.
